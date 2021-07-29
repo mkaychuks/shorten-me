@@ -1,3 +1,5 @@
+const ShortUrl = require('../models/urlModels');
+
 const urlHomePage = (req, res) => {
   res.json({
     message: 'Hello world',
@@ -5,6 +7,22 @@ const urlHomePage = (req, res) => {
   });
 };
 
-const shortUrl = (req, res) => {};
+const shortUrl = async (req, res) => {
+  const shortUrlDefault = new ShortUrl({
+    full: req.body.fullUrl,
+  });
+  const shortenedUrl = await shortUrlDefault.save();
+  res.status(200).json({ success: true, data: shortenedUrl });
+};
 
-module.exports = urlHomePage;
+const sendtoShortenedUrl = async (req, res) => {
+  const shortenedUrlParse = await ShortUrl.findOne({
+    short: req.params.shortUrl,
+  });
+  if (!shortenedUrlParse) {
+    return res.status(404).json({ message: 'Url does not exist' });
+  }
+  res.status(200).json({ success: true, message: 'Linking to new url' });
+};
+
+module.exports = { urlHomePage, shortUrl, sendtoShortenedUrl };
