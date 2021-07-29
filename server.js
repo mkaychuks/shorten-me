@@ -9,7 +9,7 @@ app.use('/api/', urlRouter);
 
 // creating a database connection
 mongoose
-  .connect(DB_URI, {
+  .connect(process.env.DB_URI, {
     useUnifiedTopology: true,
     useCreateIndex: true,
     useNewUrlParser: true,
