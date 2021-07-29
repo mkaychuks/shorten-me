@@ -7,6 +7,7 @@ const app = express(); // init express app
 app.use(express.json()); // allow json inputs and res
 app.use('/api/', urlRouter);
 
+// creating a database connection
 mongoose
   .connect(DB_URI, {
     useUnifiedTopology: true,
