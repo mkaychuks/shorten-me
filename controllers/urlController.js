@@ -7,12 +7,17 @@ const urlHomePage = (req, res) => {
   });
 };
 
+// handle the POST REQUEST to create a short url
 const shortUrl = async (req, res) => {
-  const shortUrlDefault = new ShortUrl({
-    full: req.body.fullUrl,
-  });
-  const shortenedUrl = await shortUrlDefault.save();
-  res.status(200).json({ success: true, data: shortenedUrl });
+  try {
+    const shortUrlDefault = new ShortUrl({
+      full: req.body.fullUrl,
+    });
+    const shortenedUrl = await shortUrlDefault.save();
+    res.status(200).json({ success: true, data: shortenedUrl });
+  } catch (err) {
+    res.send(err);
+  }
 };
 
 const sendtoShortenedUrl = async (req, res) => {
