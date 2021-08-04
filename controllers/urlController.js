@@ -20,7 +20,7 @@ const shortUrl = async (req, res) => {
   }
 };
 
-const sendtoShortenedUrl = async (req, res) => {
+const getShortenedUrl = async (req, res) => {
   const shortenedUrlParse = await ShortUrl.findOne({
     short: req.params.shortUrl,
   });
@@ -30,4 +30,4 @@ const sendtoShortenedUrl = async (req, res) => {
   res.status(200).json({ success: true, message: 'Linking to new url' });
 };
 
-module.exports = { urlHomePage, shortUrl, sendtoShortenedUrl };
+module.exports = { urlHomePage, shortUrl, getShortenedUrl };
