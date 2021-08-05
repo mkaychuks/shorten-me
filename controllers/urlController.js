@@ -20,6 +20,7 @@ const shortUrl = async (req, res) => {
   }
 };
 
+// return the shortened url from the database
 const getShortenedUrl = async (req, res) => {
   const shortenedUrlParse = await ShortUrl.findOne({
     short: req.params.shortUrl,
