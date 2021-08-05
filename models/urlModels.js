@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const nanoid = require('nanoid'); // init shortener package
+const shortId = require('shortid'); // init shortener package
 
-// this function generates an unique identifier
-
+// schemaValue
 const shortUrlSchema = new Schema({
   full: {
     type: String,
@@ -12,7 +11,7 @@ const shortUrlSchema = new Schema({
   short: {
     type: String,
     required: true,
-    default: nanoid(10),
+    default: shortId.generate,
   },
   clicks: {
     type: Number,
